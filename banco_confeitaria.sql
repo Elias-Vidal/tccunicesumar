@@ -1,31 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 04/07/2026 às 21:44
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `tcc`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `caixa`
---
 
 CREATE TABLE `caixa` (
   `id` int(11) NOT NULL,
@@ -35,10 +11,6 @@ CREATE TABLE `caixa` (
   `forma_pagamento` varchar(50) NOT NULL,
   `data_transacao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `caixa`
---
 
 INSERT INTO `caixa` (`id`, `tipo`, `descricao`, `valor`, `forma_pagamento`, `data_transacao`) VALUES
 (1, 'entrada', 'Venda: 5x Farinha', 10.00, 'Pix', '2026-05-19 01:30:56'),
@@ -126,12 +98,6 @@ INSERT INTO `caixa` (`id`, `tipo`, `descricao`, `valor`, `forma_pagamento`, `dat
 (90, 'entrada', 'Venda PDV - Comanda #77', 50.00, 'Dinheiro', '2026-07-04 03:43:55'),
 (91, 'saida', 'troco retirada 10 reais', 10.00, 'Dinheiro', '2026-07-04 03:49:43');
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `clientes`
---
-
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -141,19 +107,9 @@ CREATE TABLE `clientes` (
   `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `clientes`
---
-
 INSERT INTO `clientes` (`id`, `nome`, `email`, `telefone`, `cpf`, `data_cadastro`) VALUES
 (1, 'teste1', 'testemail@mail.com', '1299999999', '123456789', '2026-05-18 23:26:24'),
 (2, 'elias', 'mail@Mail.com', '12123456789', '12346800001', '2026-06-11 01:53:22');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `comandas`
---
 
 CREATE TABLE `comandas` (
   `id` int(11) NOT NULL,
@@ -164,10 +120,6 @@ CREATE TABLE `comandas` (
   `data_abertura` timestamp NOT NULL DEFAULT current_timestamp(),
   `data_fechamento` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `comandas`
---
 
 INSERT INTO `comandas` (`id`, `identificacao`, `nome_cliente`, `status`, `total`, `data_abertura`, `data_fechamento`) VALUES
 (1, '001', NULL, 'paga', 8.00, '2026-05-21 01:01:23', '2026-05-21 01:24:37'),
@@ -246,12 +198,6 @@ INSERT INTO `comandas` (`id`, `identificacao`, `nome_cliente`, `status`, `total`
 (76, '30', NULL, 'paga', 840.00, '2026-07-04 02:31:38', '2026-07-04 02:32:12'),
 (77, '30', NULL, 'paga', 50.00, '2026-07-04 03:38:47', '2026-07-04 03:43:55');
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `estoque`
---
-
 CREATE TABLE `estoque` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -261,10 +207,6 @@ CREATE TABLE `estoque` (
   `valor` decimal(10,2) NOT NULL,
   `data_atualizacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `estoque`
---
 
 INSERT INTO `estoque` (`id`, `nome`, `tipo`, `quantidade`, `custo`, `valor`, `data_atualizacao`) VALUES
 (7, 'Pão de sal', 'Produto Final', 0, 0.30, 2.00, '2026-06-11 01:15:13'),
@@ -302,12 +244,6 @@ INSERT INTO `estoque` (`id`, `nome`, `tipo`, `quantidade`, `custo`, `valor`, `da
 (40, 'Café em grão 20 kg', 'Insumo', 6, 1200.00, 0.00, '2026-07-01 23:32:57'),
 (41, 'Barra de chocolate 5 kg', 'Insumo', 5, 140.00, 0.00, '2026-07-01 23:36:03');
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `fechamentos_caixa`
---
-
 CREATE TABLE `fechamentos_caixa` (
   `id` int(11) NOT NULL,
   `valor_esperado` decimal(10,2) DEFAULT NULL,
@@ -316,24 +252,12 @@ CREATE TABLE `fechamentos_caixa` (
   `data_fechamento` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `ficha_tecnica`
---
-
 CREATE TABLE `ficha_tecnica` (
   `id` int(11) NOT NULL,
   `produto_id` int(11) DEFAULT NULL,
   `ingrediente_id` int(11) DEFAULT NULL,
   `quantidade_necessaria` decimal(10,3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `fornecedores`
---
 
 CREATE TABLE `fornecedores` (
   `id` int(11) NOT NULL,
@@ -344,22 +268,12 @@ CREATE TABLE `fornecedores` (
   `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `fornecedores`
---
-
 INSERT INTO `fornecedores` (`id`, `nome`, `email`, `telefone`, `cnpj`, `data_cadastro`) VALUES
 (1, 'Distribuidor', 'email@mail.com', '129999999', '1111111111', '2026-05-19 01:29:02'),
 (2, 'Distribuidora de Trigo S.A', 'vendas@trigo.com.br', '1199999999', '01010011000100', '2026-06-11 01:52:22'),
 (3, 'cafe da fazenda minas gerais ltda', 'contato@cafe.com.br', '35 990001011', '401980000200', '2026-07-01 23:50:44'),
 (4, 'Coopertativa Laticinios', 'vendas@fornecedor.com.br', '12 11228834', '12324111000100', '2026-07-04 03:23:08'),
 (5, 'Cooperativa Laticínios', 'vendas@fornecedor.com.br', '11 11330011', '12323111-0001/00', '2026-07-04 03:28:57');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `historico_estoque`
---
 
 CREATE TABLE `historico_estoque` (
   `id` int(11) NOT NULL,
@@ -370,10 +284,6 @@ CREATE TABLE `historico_estoque` (
   `origem` varchar(100) NOT NULL,
   `data_movimentacao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `historico_estoque`
---
 
 INSERT INTO `historico_estoque` (`id`, `produto_id`, `nome_produto`, `quantidade`, `tipo_movimentacao`, `origem`, `data_movimentacao`) VALUES
 (1, 4, 'cafe expresso', 2, 'saida', 'Venda Balcão - Comanda 3', '2026-05-23 01:44:17'),
@@ -503,12 +413,6 @@ INSERT INTO `historico_estoque` (`id`, `produto_id`, `nome_produto`, `quantidade
 (125, 14, 'cafe com leite', 4, 'saida', 'Venda PDV - Comanda 72', '2026-07-04 02:32:51'),
 (126, 22, 'Mil-folhas Tradicional', 2, 'saida', 'Venda PDV - Comanda 77', '2026-07-04 03:40:31');
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `itens_comanda`
---
-
 CREATE TABLE `itens_comanda` (
   `id` int(11) NOT NULL,
   `comanda_id` int(11) DEFAULT NULL,
@@ -518,10 +422,6 @@ CREATE TABLE `itens_comanda` (
   `preco_unitario` decimal(10,2) DEFAULT NULL,
   `subtotal` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `itens_comanda`
---
 
 INSERT INTO `itens_comanda` (`id`, `comanda_id`, `produto_id`, `nome_produto`, `quantidade`, `preco_unitario`, `subtotal`) VALUES
 (1, 1, 4, 'cafe expresso', 1, 8.00, 8.00),
@@ -620,22 +520,12 @@ INSERT INTO `itens_comanda` (`id`, `comanda_id`, `produto_id`, `nome_produto`, `
 (103, 72, 14, 'cafe com leite', 4, 10.00, 40.00),
 (104, 77, 22, 'Mil-folhas Tradicional', 2, 25.00, 50.00);
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `pagamentos_comanda`
---
-
 CREATE TABLE `pagamentos_comanda` (
   `id` int(11) NOT NULL,
   `comanda_id` int(11) DEFAULT NULL,
   `forma_pagamento` varchar(50) DEFAULT NULL,
   `valor` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `pagamentos_comanda`
---
 
 INSERT INTO `pagamentos_comanda` (`id`, `comanda_id`, `forma_pagamento`, `valor`) VALUES
 (1, 2, 'Dinheiro', 14.00),
@@ -709,12 +599,6 @@ INSERT INTO `pagamentos_comanda` (`id`, `comanda_id`, `forma_pagamento`, `valor`
 (74, 76, 'Cartão de Débito', 40.00),
 (75, 77, 'Dinheiro', 50.00);
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `perdas`
---
-
 CREATE TABLE `perdas` (
   `id` int(11) NOT NULL,
   `produto_id` int(11) DEFAULT NULL,
@@ -722,12 +606,6 @@ CREATE TABLE `perdas` (
   `motivo` varchar(255) DEFAULT NULL,
   `data_perda` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `vendas`
---
 
 CREATE TABLE `vendas` (
   `id` int(11) NOT NULL,
@@ -737,205 +615,101 @@ CREATE TABLE `vendas` (
   `data_venda` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `vendas`
---
-
 INSERT INTO `vendas` (`id`, `produto_nome`, `quantidade`, `valor_total`, `data_venda`) VALUES
 (1, 'Farinha', 1, 2.00, '2026-05-19 00:41:32'),
 (2, 'Pudim', 1, 20.00, '2026-05-19 00:56:34'),
 (3, 'Farinha', 5, 10.00, '2026-05-19 01:30:56'),
 (4, 'Pudim', 1, 20.00, '2026-05-19 01:33:38');
 
---
--- Índices para tabelas despejadas
---
-
---
--- Índices de tabela `caixa`
---
 ALTER TABLE `caixa`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices de tabela `clientes`
---
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cpf` (`cpf`);
 
---
--- Índices de tabela `comandas`
---
 ALTER TABLE `comandas`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices de tabela `estoque`
---
 ALTER TABLE `estoque`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices de tabela `fechamentos_caixa`
---
 ALTER TABLE `fechamentos_caixa`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices de tabela `ficha_tecnica`
---
 ALTER TABLE `ficha_tecnica`
   ADD PRIMARY KEY (`id`),
   ADD KEY `produto_id` (`produto_id`),
   ADD KEY `ingrediente_id` (`ingrediente_id`);
 
---
--- Índices de tabela `fornecedores`
---
 ALTER TABLE `fornecedores`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cnpj` (`cnpj`);
 
---
--- Índices de tabela `historico_estoque`
---
 ALTER TABLE `historico_estoque`
   ADD PRIMARY KEY (`id`);
 
---
--- Índices de tabela `itens_comanda`
---
 ALTER TABLE `itens_comanda`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comanda_id` (`comanda_id`);
 
---
--- Índices de tabela `pagamentos_comanda`
---
 ALTER TABLE `pagamentos_comanda`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comanda_id` (`comanda_id`);
 
---
--- Índices de tabela `perdas`
---
 ALTER TABLE `perdas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `produto_id` (`produto_id`);
 
---
--- Índices de tabela `vendas`
---
 ALTER TABLE `vendas`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT para tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `caixa`
---
 ALTER TABLE `caixa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
---
--- AUTO_INCREMENT de tabela `clientes`
---
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT de tabela `comandas`
---
 ALTER TABLE `comandas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
---
--- AUTO_INCREMENT de tabela `estoque`
---
 ALTER TABLE `estoque`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
---
--- AUTO_INCREMENT de tabela `fechamentos_caixa`
---
 ALTER TABLE `fechamentos_caixa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de tabela `ficha_tecnica`
---
 ALTER TABLE `ficha_tecnica`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de tabela `fornecedores`
---
 ALTER TABLE `fornecedores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT de tabela `historico_estoque`
---
 ALTER TABLE `historico_estoque`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
---
--- AUTO_INCREMENT de tabela `itens_comanda`
---
 ALTER TABLE `itens_comanda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
---
--- AUTO_INCREMENT de tabela `pagamentos_comanda`
---
 ALTER TABLE `pagamentos_comanda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
---
--- AUTO_INCREMENT de tabela `perdas`
---
 ALTER TABLE `perdas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de tabela `vendas`
---
 ALTER TABLE `vendas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `ficha_tecnica`
---
 ALTER TABLE `ficha_tecnica`
   ADD CONSTRAINT `ficha_tecnica_ibfk_1` FOREIGN KEY (`produto_id`) REFERENCES `estoque` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `ficha_tecnica_ibfk_2` FOREIGN KEY (`ingrediente_id`) REFERENCES `estoque` (`id`) ON DELETE CASCADE;
 
---
--- Restrições para tabelas `itens_comanda`
---
 ALTER TABLE `itens_comanda`
   ADD CONSTRAINT `itens_comanda_ibfk_1` FOREIGN KEY (`comanda_id`) REFERENCES `comandas` (`id`) ON DELETE CASCADE;
 
---
--- Restrições para tabelas `pagamentos_comanda`
---
 ALTER TABLE `pagamentos_comanda`
   ADD CONSTRAINT `pagamentos_comanda_ibfk_1` FOREIGN KEY (`comanda_id`) REFERENCES `comandas` (`id`) ON DELETE CASCADE;
 
---
--- Restrições para tabelas `perdas`
---
 ALTER TABLE `perdas`
   ADD CONSTRAINT `perdas_ibfk_1` FOREIGN KEY (`produto_id`) REFERENCES `estoque` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
