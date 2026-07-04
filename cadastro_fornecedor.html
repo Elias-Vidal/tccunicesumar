@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Confeitaria - Fornecedores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">ERP Confeitaria</div>
+        <a href="index.html">Dashboard</a>
+        <a href="atendimento.html">PDV / Balcão</a>
+        <a href="caixa.html">Fluxo de Caixa</a>
+        <a href="estoque.html">Estoque</a>
+        <div style="flex: 1;"></div>
+        <a href="cadastro_cliente.html">Clientes</a>
+        <a href="cadastro_fornecedor.html" class="ativo">Fornecedores</a>
+    </div>
+
+    <div class="main-content">
+        <div style="margin-bottom: 30px;">
+            <h1 style="margin: 0; color: #0f172a; font-size: 28px; font-weight: 800;">Gestão de Fornecedores</h1>
+            <p style="margin: 5px 0 0 0; color: #64748b; font-size: 15px;">Controle da cadeia de suprimentos e insumos operacionais.</p>
+        </div>
+
+        <div class="card-form">
+            <h3 style="margin-top: 0; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">Novo Fornecedor</h3>
+            <form id="formFornecedor">
+    <div class="form-grid">
+        <div class="col-8">
+            <label>Razão Social / Nome Fantasia:</label>
+            <input type="text" id="nome" required placeholder="Nome do distribuidor" class="input-moderno">
+        </div>
+        <div class="col-4">
+            <label>CNPJ:</label>
+            <input type="text" id="cnpj" required placeholder="00.000.000/0000-00" class="input-moderno">
+        </div>
+    </div>
+
+    <div class="form-grid">
+        <div class="col-7"> <label>E-mail (Setor de Vendas):</label>
+            <input type="email" id="email" placeholder="vendas@fornecedor.com.br" class="input-moderno">
+        </div>
+        <div class="col-5"> <label>Telefone / SAC:</label>
+            <input type="text" id="telefone" required placeholder="(00) 0000-0000" class="input-moderno">
+        </div>
+    </div>
+
+    <div class="form-grid">
+        <div class="col-2">
+            <label>CEP:</label>
+            <input type="text" id="cep" placeholder="01001-000" maxlength="9" class="input-moderno">
+        </div>
+        <div class="col-8"> <label>Logradouro / Rodovia:</label>
+            <input type="text" id="rua" readonly class="input-moderno readonly">
+        </div>
+        <div class="col-2"> <label>Número:</label>
+            <input type="text" id="numero" required placeholder="0" class="input-moderno">
+        </div>
+    </div>
+
+    <div class="form-grid">
+        <div class="col-5"> <label>Bairro / Polo Ind.:</label>
+            <input type="text" id="bairro" readonly class="input-moderno readonly">
+        </div>
+        <div class="col-5"> <label>Cidade:</label>
+            <input type="text" id="cidade" readonly class="input-moderno readonly">
+        </div>
+        <div class="col-2"> <label>UF:</label>
+            <input type="text" id="estado" readonly class="input-moderno readonly">
+        </div>
+    </div>
+
+    <div style="text-align: right; margin-top: 15px;">
+        <button type="submit" style="padding: 10px 20px; background-color: var(--sucesso); color: white; border: none; border-radius: 5px; font-weight: 600; cursor: pointer;">
+            Salvar Fornecedor
+        </button>
+    </div>
+</form>
+        </div>
+
+        <div class="card-form">
+            <h3 style="margin-top: 0; margin-bottom: 15px;">Lista de Fornecedores</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #e2e8f0;">
+                        <th style="padding: 12px; color: #475569;">ID</th>
+                        <th style="padding: 12px; color: #475569;">Razão Social</th>
+                        <th style="padding: 12px; color: #475569;">CNPJ</th>
+                        <th style="padding: 12px; color: #475569;">Contato SAC</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaFornecedores"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/fornecedores.js"></script>
+</body>
+</html>

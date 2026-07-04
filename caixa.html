@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Confeitaria - Fluxo de Caixa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">ERP Confeitaria</div>
+        <a href="index.html">Dashboard</a>
+        <a href="atendimento.html">PDV / Balcão</a>
+        <a href="caixa.html" class="ativo">Fluxo de Caixa</a>
+        <a href="estoque.html">Estoque</a>
+        <div style="flex: 1;"></div>
+        <a href="cadastro_cliente.html">Clientes</a>
+        <a href="cadastro_fornecedor.html">Fornecedores</a>
+    </div>
+
+    <div class="main-content">
+        <div class="card-erp">
+            <h3>Visão do Dia (Caixa)</h3>
+            <div class="painel-caixa">
+                <div class="card card-entrada">
+                    <div style="font-size: 12px; text-transform: uppercase;">Entradas (Vendas)</div>
+                    <div id="totalEntradas" style="font-size: 24px; margin-top: 5px;">R$ 0,00</div>
+                </div>
+                <div class="card card-saida">
+                    <div style="font-size: 12px; text-transform: uppercase;">Saídas (Despesas)</div>
+                    <div id="totalSaidas" style="font-size: 24px; margin-top: 5px;">R$ 0,00</div>
+                </div>
+                <div class="card card-saldo">
+                    <div style="font-size: 12px; text-transform: uppercase;">Saldo Líquido</div>
+                    <div id="saldoAtual" style="font-size: 24px; margin-top: 5px;">R$ 0,00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-erp">
+            <h3>Distribuição de Pagamentos</h3>
+            <div class="grid-metodos">
+                <div class="metodo-item">Dinheiro: <span id="resDinheiro" class="txt-entrada">R$ 0,00</span></div>
+                <div class="metodo-item">Pix: <span id="resPix" class="txt-entrada">R$ 0,00</span></div>
+                <div class="metodo-item">Crédito: <span id="resCredito" class="txt-entrada">R$ 0,00</span></div>
+                <div class="metodo-item">Débito: <span id="resDebito" class="txt-entrada">R$ 0,00</span></div>
+            </div>
+        </div>
+
+        <div class="card-erp">
+            <h3>Lançamento Manual (Despesas/Ajustes)</h3>
+            <form id="formCaixa" class="row">
+                <div>
+                    <label>Tipo:</label>
+                    <select id="tipo" required>
+                        <option value="saida">Saída (Despesa/Pagamento)</option>
+                        <option value="entrada">Entrada (Aporte/Sobra)</option>
+                    </select>
+                </div>
+                <div style="flex: 2;">
+                    <label>Descrição:</label>
+                    <input type="text" id="descricao" required placeholder="Ex: Pagamento Fornecedor Farinha">
+                </div>
+                <div>
+                    <label>Forma:</label>
+                    <select id="forma_pagamento" required>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Pix">Pix</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Valor (R$):</label>
+                    <input type="number" id="valor" step="0.01" min="0.01" required>
+                </div>
+                <div style="display: flex; align-items: flex-end; margin-bottom: 15px;">
+                    <button type="submit" style="width: 100%;">Registrar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card-erp">
+            <h3>Extrato Diário</h3>
+            <table>
+                <thead>
+                    <tr><th>Hora</th><th>Tipo</th><th>Descrição</th><th>Forma</th><th>Valor</th></tr>
+                </thead>
+                <tbody id="tabelaCaixa"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/caixa.js"></script>
+</body>
+</html>

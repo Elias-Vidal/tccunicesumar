@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Confeitaria - PDV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">ERP Confeitaria</div>
+        <a href="index.html">Dashboard</a>
+        <a href="atendimento.html" class="ativo">PDV / Balcão</a>
+        <a href="caixa.html">Fluxo de Caixa</a>
+        <a href="estoque.html">Estoque</a>
+        <div style="flex: 1;"></div>
+        <a href="cadastro_cliente.html">Clientes</a>
+        <a href="cadastro_fornecedor.html">Fornecedores</a>
+    </div>
+
+    <div class="main-content">
+        <h2 style="margin-top: 0; color: var(--secundaria); margin-bottom: 25px;">Balcão de Atendimento</h2>
+
+        <div class="layout-balcao">
+            <div class="card-erp painel-esquerdo">
+                <h3>Comandas Abertas</h3>
+                <form id="formNovaComanda" style="display: flex; gap: 10px;">
+                    <input type="text" id="idComanda" required placeholder="Nº Comanda/Mesa" style="flex: 1;">
+                    <input type="text" id="nomeCliente" placeholder="Nome (Opcional)" style="flex: 1.5;">
+                    <button type="submit" style="background-color: #2980b9;">Abrir</button>
+                </form>
+                <div id="listaComandas" class="grid-comandas"></div>
+            </div>
+
+            <div class="card-erp painel-direito" id="painelCarrinho">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--borda); margin-bottom: 15px; padding-bottom: 10px;">
+                    <h3 id="tituloComanda" style="color: var(--alerta); margin: 0; border: none;">Comanda: -</h3>
+                    <button type="button" onclick="imprimirConferencia()" style="background: #34495e; padding: 6px 12px; font-size: 12px;">Imprimir Extrato</button>
+                </div>
+
+                <form id="formAdicionarItem" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <input type="hidden" id="comandaAtualId">
+                    <select id="produtoSelect" required style="flex: 2; margin-bottom:0;"></select>
+                    <input type="number" id="qtdItem" step="0.01" min="0.01" value="1" required style="flex: 0.5; margin-bottom:0; text-align: center;">
+                    <button type="submit">Lançar</button>
+                </form>
+
+                <table>
+                    <thead><tr><th>Produto</th><th>Qtd</th><th>Un.</th><th>Subtotal</th><th>Ação</th></tr></thead>
+                    <tbody id="tabelaItens"></tbody>
+                </table>
+                <div class="total-comanda" id="totalComandaText">Total: R$ 0,00</div>
+                <button style="width: 100%; margin-top: 10px; padding: 10px; background: var(--primaria);" onclick="excluirComandaAtual()">Cancelar Comanda</button>
+                <button style="width: 100%; margin-top: 15px; padding: 15px; font-size: 16px;" onclick="abrirModalPagamento()">Ir para Pagamento</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPagamento" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-top:0; color:var(--secundaria); border-bottom: 1px solid #ccc; padding-bottom:10px;">Finalizar Venda</h2>
+            <h3 id="modalTotal" style="color:var(--sucesso); text-align:right;">Total: R$ 0,00</h3>
+            <p style="font-size: 12px; color: #7f8c8d;">Insira os valores recebidos (Permite pagamento misto):</p>
+            
+            <div class="pg-row"><span>Dinheiro:</span><input type="number" class="input-pg" id="pgDinheiro" step="0.01" min="0" oninput="calcularTroco()"></div>
+            <div class="pg-row"><span>Pix:</span><input type="number" class="input-pg" id="pgPix" step="0.01" min="0" oninput="calcularTroco()"></div>
+            <div class="pg-row"><span>C. Crédito:</span><input type="number" class="input-pg" id="pgCredito" step="0.01" min="0" oninput="calcularTroco()"></div>
+            <div class="pg-row"><span>C. Débito:</span><input type="number" class="input-pg" id="pgDebito" step="0.01" min="0" oninput="calcularTroco()"></div>
+            
+            <h3 id="modalTroco" style="color:var(--primaria); text-align:right; margin-top: 15px;">Faltam: R$ 0,00</h3>
+            
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="fecharModalPagamento()" style="background-color: #95a5a6; flex: 1;">Cancelar</button>
+                <button id="btnConfirmarPg" onclick="finalizarComanda()" style="flex: 2; opacity: 0.5; cursor: not-allowed;" disabled>Confirmar Baixa</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/atendimento.js"></script>
+    
+</body>
+</html>
